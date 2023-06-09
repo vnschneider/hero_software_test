@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:hero_software_test/app/core/helper/size_extensions.dart';
 import 'package:hero_software_test/app/core/styles/color_style.dart';
@@ -6,6 +7,8 @@ import 'package:hero_software_test/app/core/widgets/container_logo.dart';
 import 'package:hero_software_test/app/core/widgets/custom_elevated_button.dart';
 import 'package:hero_software_test/app/core/widgets/custom_text_field.dart';
 import 'package:hero_software_test/app/pages/login/components/custom_checkbox.dart';
+
+import '../../core/widgets/custom_footer.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -44,25 +47,17 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const ContainerLogo(),
-                const SizedBox(height: 30),
-                Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Text('Acesse sua conta',
-                      style: context.textStyles.textMedium.copyWith(
-                          fontSize: 20,
-                          color: context.colors.secondary,
-                          letterSpacing: 1)),
-                ),
+                const ContainerLogo(label: 'Acesse sua conta'),
+                const SizedBox(height: 20),
                 CustomTextField(
                   label: 'E-mail',
+                  hintText: 'E-mail',
                   fieldWidth: context.percentWidth(.9),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20),
                 CustomTextField(
                   label: 'Senha',
+                  hintText: 'Senha',
                   fieldWidth: context.percentWidth(.9),
                   obscureText: true,
                 ),
@@ -107,55 +102,15 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const BottomLoginPage(),
+                CustomFooter(
+                    onPressed: () => print('Clicou para cadastrar-se'),
+                    label: 'Novo por aqui? ',
+                    buttonLabel: 'CADASTRE-SE'),
               ],
             ),
           ),
         ),
       ),
-    );
-  }
-}
-
-class BottomLoginPage extends StatelessWidget {
-  const BottomLoginPage({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Divider(
-            thickness: 2,
-            height: 10,
-          ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Novo por aqui? ',
-              style: context.textStyles.textRegular.copyWith(
-                color: context.colors.secondary,
-                fontSize: 17,
-              ),
-            ),
-            TextButton(
-              onPressed: () => print('Clicou em cadastro'),
-              child: Text(
-                'CADASTRE-SE',
-                style: context.textStyles.textExtraBold.copyWith(
-                  color: context.colors.blue,
-                  fontSize: 17,
-                ),
-              ),
-            ),
-          ],
-        )
-      ],
     );
   }
 }

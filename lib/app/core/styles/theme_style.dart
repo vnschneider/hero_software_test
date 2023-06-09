@@ -16,7 +16,7 @@ class ThemeStyle {
   static final theme = ThemeData(
     scaffoldBackgroundColor: Colors.white,
     appBarTheme: AppBarTheme(
-      backgroundColor: ColorsStyle.instance.black,
+      backgroundColor: ColorsStyle.instance.primary,
       elevation: 0,
       iconTheme: IconThemeData(
         color: ColorsStyle.instance.secondary,

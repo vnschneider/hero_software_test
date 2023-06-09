@@ -3,7 +3,8 @@ import 'package:hero_software_test/app/core/styles/color_style.dart';
 import 'package:hero_software_test/app/core/styles/text_styles.dart';
 
 class CustomTextField extends StatelessWidget {
-  final String label;
+  final String? label;
+  final String hintText;
   final double fieldWidth;
   final String? Function(String?)? validation;
   final bool obscureText;
@@ -13,9 +14,10 @@ class CustomTextField extends StatelessWidget {
     super.key,
     this.validation,
     this.obscureText = false,
-    required this.label,
+    this.label,
     required this.fieldWidth,
     this.fontSize = 17,
+    required this.hintText,
   });
   const CustomTextField.password({
     super.key,
@@ -24,6 +26,7 @@ class CustomTextField extends StatelessWidget {
     required this.label,
     required this.fieldWidth,
     this.fontSize = 25,
+    required this.hintText,
   });
 
   @override
@@ -57,6 +60,7 @@ class CustomTextField extends StatelessWidget {
             width: fieldWidth,
             child: TextFormField(
               cursorColor: context.colors.secondary,
+              
               cursorHeight: 20,
               style: context.textStyles.textRegular.copyWith(
                   fontSize: fontSize,
@@ -64,7 +68,10 @@ class CustomTextField extends StatelessWidget {
                   letterSpacing: 1),
               obscureText: obscureText,
               decoration: InputDecoration(
-                hintText: label,
+                
+                hintText: hintText,
+                hintStyle: context.textStyles.textRegular
+                    .copyWith(color: Colors.grey.shade400),
               ),
               validator: validation,
             ),
