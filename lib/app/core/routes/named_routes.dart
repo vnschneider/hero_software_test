@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hero_software_test/app/pages/home/home_page.dart';
-import 'package:hero_software_test/app/pages/recover/email_confirmation_page.dart';
-import 'package:hero_software_test/app/pages/recover/password_confirmation_page.dart';
+import 'package:hero_software_test/app/pages/recovery/email_confirmation_page.dart';
+import 'package:hero_software_test/app/pages/recovery/password_confirmation_page.dart';
 import 'package:hero_software_test/app/pages/register/register_page.dart';
 import 'package:hero_software_test/app/pages/splash/splash_page.dart';
 import 'package:hero_software_test/app/services/auth_check.dart';
