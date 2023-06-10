@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "106671705048",
+    "project_id": "hero-software-test",
+    "storage_bucket": "hero-software-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:106671705048:android:66afc2c09a2531d07980ad",
+        "android_client_info": {
+          "package_name": "br.com.erimedeiros.hero_software_test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "106671705048-7fef7r9oe17p9lpe4jstnre1fris2esv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHPlRZqK5W49KcCJw3mb43tneVYlU-xIU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "106671705048-7fef7r9oe17p9lpe4jstnre1fris2esv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
