@@ -4,6 +4,7 @@ import 'package:hero_software_test/app/core/styles/text_styles.dart';
 
 class CustomTextField extends StatelessWidget {
   final String? label;
+  final bool isMandatory;
   final String hintText;
   final double fieldWidth;
   final String? Function(String?)? validation;
@@ -18,6 +19,7 @@ class CustomTextField extends StatelessWidget {
     required this.fieldWidth,
     this.fontSize = 17,
     required this.hintText,
+    this.isMandatory = true,
   });
   const CustomTextField.password({
     super.key,
@@ -27,6 +29,7 @@ class CustomTextField extends StatelessWidget {
     required this.fieldWidth,
     this.fontSize = 25,
     required this.hintText,
+    this.isMandatory = true,
   });
 
   @override
@@ -45,13 +48,14 @@ class CustomTextField extends StatelessWidget {
                     fontSize: 17,
                   ),
                 ),
-                TextSpan(
-                  text: ' *',
-                  style: context.textStyles.textExtraBold.copyWith(
-                    color: context.colors.blue,
-                    fontSize: 17,
+                if (isMandatory)
+                  TextSpan(
+                    text: ' *',
+                    style: context.textStyles.textExtraBold.copyWith(
+                      color: context.colors.blue,
+                      fontSize: 17,
+                    ),
                   ),
-                ),
               ],
             ),
           ),
@@ -60,7 +64,6 @@ class CustomTextField extends StatelessWidget {
             width: fieldWidth,
             child: TextFormField(
               cursorColor: context.colors.secondary,
-              
               cursorHeight: 20,
               style: context.textStyles.textRegular.copyWith(
                   fontSize: fontSize,
@@ -68,7 +71,6 @@ class CustomTextField extends StatelessWidget {
                   letterSpacing: 1),
               obscureText: obscureText,
               decoration: InputDecoration(
-                
                 hintText: hintText,
                 hintStyle: context.textStyles.textRegular
                     .copyWith(color: Colors.grey.shade400),
