@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hero_software_test/app/core/routes/named_routes.dart';
 import 'package:hero_software_test/app/core/styles/theme_style.dart';
-import 'package:hero_software_test/app/pages/splash/splash_page.dart';
+import 'package:hero_software_test/app/services/auth_check.dart';
 
 class HSTest extends StatelessWidget {
   const HSTest({super.key});
@@ -12,7 +12,7 @@ class HSTest extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeStyle.theme,
-      home: const SplashPage(),
+      home: const AuthCheck(),
       getPages: getPages,
     );
   }

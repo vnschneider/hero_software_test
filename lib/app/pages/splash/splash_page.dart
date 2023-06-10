@@ -1,7 +1,7 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hero_software_test/app/core/styles/color_style.dart';
-import 'package:hero_software_test/app/pages/login/login_page.dart';
+import 'package:hero_software_test/app/services/auth_check.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -12,7 +12,8 @@ class SplashPage extends StatelessWidget {
       child: AnimatedSplashScreen(
         centered: true,
         splash: 'assets/images/logo.png',
-        nextScreen: const LoginPage(),
+        nextScreen: const AuthCheck(),
+        nextRoute: '/',
         splashTransition: SplashTransition.fadeTransition,
         duration: 3000,
         curve: Curves.easeIn,

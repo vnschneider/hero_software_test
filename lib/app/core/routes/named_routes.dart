@@ -5,12 +5,20 @@ import 'package:hero_software_test/app/pages/recover/email_confirmation_page.dar
 import 'package:hero_software_test/app/pages/recover/password_confirmation_page.dart';
 import 'package:hero_software_test/app/pages/register/register_page.dart';
 import 'package:hero_software_test/app/pages/splash/splash_page.dart';
+import 'package:hero_software_test/app/services/auth_check.dart';
 
 import '../../pages/login/login_page.dart';
 
 List<GetPage<dynamic>>? getPages = [
-    GetPage(
+  GetPage(
     name: '/',
+    page: () => const AuthCheck(),
+    curve: Curves.easeIn,
+    transition: Transition.fadeIn,
+    transitionDuration: const Duration(milliseconds: 500),
+  ),
+  GetPage(
+    name: '/splash',
     page: () => const SplashPage(),
     curve: Curves.easeIn,
     transition: Transition.fadeIn,

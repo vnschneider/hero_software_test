@@ -53,23 +53,23 @@ class UserAuthController extends GetxController {
     update();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  // @override
+  // void onReady() {
+  //   super.onReady();
 
-    user = Rx<User?>(instance.currentUser);
-    user.bindStream(instance.userChanges());
+  //   user = Rx<User?>(instance.currentUser);
+  //   user.bindStream(instance.userChanges());
 
-    ever(user, _authenticationUser);
-  }
+  //   ever(user, _authenticationUser);
+  // }
 
-  _authenticationUser(User? user) {
-    if (user == null) {
-      Get.offAllNamed('/');
-    } else {
-      Get.offAllNamed('/home');
-    }
-  }
+  // _authenticationUser(User? user) {
+  //   if (user == null) {
+  //     Get.offNamed('/');
+  //   } else {
+  //     Get.offNamed('/home');
+  //   }
+  // }
 
   resetPassword({required String email}) async {
     await instance.sendPasswordResetEmail(email: email).catchError((error) =>
