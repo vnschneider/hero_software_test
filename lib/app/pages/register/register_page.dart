@@ -115,6 +115,7 @@ class RegisterPage extends StatelessWidget {
                     onPressed: () => print('Clicou para voltar ao login'),
                     label: 'Possui uma conta? ',
                     buttonLabel: 'ENTRAR'),
+                const SizedBox(height: 10),
               ],
             ),
           ),
