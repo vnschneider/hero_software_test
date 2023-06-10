@@ -25,13 +25,10 @@ class ContainerLogo extends StatelessWidget {
             padding: const EdgeInsets.all(15),
             child: Text(
               label,
-              style: context.textStyles.textBold.copyWith(
-                  fontSize: 20,
-                  color: context.colors.secondary,
-                  letterSpacing: 1),
+              style: context.textStyles.textTitle
+                  .copyWith(color: context.colors.secondary, letterSpacing: 1),
             ),
           ),
-     
         ],
       ),
     );

@@ -20,6 +20,8 @@ class ThemeStyle {
       elevation: 0,
       iconTheme: IconThemeData(
         color: ColorsStyle.instance.secondary,
+        size: 30,
+        weight: 100,
       ),
     ),
     colorScheme: ColorScheme.fromSeed(
