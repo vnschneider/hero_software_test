@@ -53,6 +53,14 @@ class UserAuthController extends GetxController {
     update();
   }
 
+  // _authenticationUser(User? user) {
+  //   if (user == null) {
+  //     Get.offNamed('/');
+  //   } else {
+  //     Get.offNamed('/home');
+  //   }
+  // }
+
   // @override
   // void onReady() {
   //   super.onReady();
@@ -63,18 +71,11 @@ class UserAuthController extends GetxController {
   //   ever(user, _authenticationUser);
   // }
 
-  // _authenticationUser(User? user) {
-  //   if (user == null) {
-  //     Get.offNamed('/');
-  //   } else {
-  //     Get.offNamed('/home');
-  //   }
-  // }
-
   resetPassword({required String email}) async {
-    await instance.sendPasswordResetEmail(email: email).catchError((error) =>
-        Get.snackbar(
-            'Recuperação de senha!', 'Erro ao enviar email de recuperação.'));
+    await instance.sendPasswordResetEmail(email: email).catchError(
+          (error) => Get.snackbar(
+              'Recuperação de senha!', 'Erro ao enviar email de recuperação.'),
+        );
   }
 
   signOut({required BuildContext context}) async {

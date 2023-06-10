@@ -13,7 +13,6 @@ class SplashPage extends StatelessWidget {
         centered: true,
         splash: 'assets/images/logo.png',
         nextScreen: const AuthCheck(),
-        nextRoute: '/',
         splashTransition: SplashTransition.fadeTransition,
         duration: 3000,
         curve: Curves.easeIn,
