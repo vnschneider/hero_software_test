@@ -2,39 +2,50 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 class UserAuthController extends GetxController {
   final FirebaseAuth instance = FirebaseAuth.instance;
   late final Rx<User?> user;
 
-  void toastMessage(String message) {
-    Fluttertoast.showToast(
-        msg: message,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 17);
+  snackMessage({required String message}) {
+    Get.showSnackbar(
+      GetSnackBar(
+        snackPosition: SnackPosition.TOP,
+        borderRadius: 10,
+        margin: const EdgeInsets.all(20),
+        backgroundColor: const Color(0xFF9ff238),
+        isDismissible: true,
+        duration: const Duration(seconds: 2),
+        borderColor: Colors.black87,
+        titleText: const Text(
+          'Erro!',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+        messageText: Text(
+          message,
+          style: const TextStyle(fontSize: 17),
+        ),
+      ),
+    );
   }
 
   Future<void> loginWithEmailAndPassword(
       {required String emailAddress, required String password}) async {
     try {
-      instance.signInWithEmailAndPassword(
+      await instance.signInWithEmailAndPassword(
           email: emailAddress, password: password);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        log('No user found for that email.');
-        toastMessage('Usuário não encontrado!');
+        log('User not found.');
+        snackMessage(message: 'Usuário não encontrado!');
       } else if (e.code == 'wrong-password') {
         log('Wrong password provided for that user.');
-        toastMessage('Senha ou e-mail incorretos!');
+        snackMessage(message: 'Senha ou e-mail incorretos!');
       }
     } catch (e) {
       log('ERROR FIREBASE', error: e);
-      toastMessage('Erro ao logar, tente novamente!');
+      snackMessage(message: 'Erro ao logar, tente novamente!');
     }
     update();
   }
@@ -52,22 +63,22 @@ class UserAuthController extends GetxController {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
         log('The account already exists for that email.');
-        toastMessage('Este e-mail já está em uso!');
-      } else if (e.code == 'user-not-found') {
-        log('User not found, maybe have been deleted.');
-        toastMessage('Usuário não cadastrado!');
+        snackMessage(message: 'Este e-mail já está em uso!');
       }
     } catch (e) {
       log('ERROR FIREBASE', error: e);
-      toastMessage('Erro ao acessar conta, tente novamente!');
+      snackMessage(message: 'Erro ao acessar conta, tente novamente!');
     }
+    Get.offAllNamed('/home');
     update();
   }
 
   resetPassword({required String email}) async {
     await instance.sendPasswordResetEmail(email: email).catchError(
-          (error) => toastMessage('Erro ao recuperar senha, tente novamente!'),
+          (error) => snackMessage(
+              message: 'Erro ao recuperar senha, tente novamente!'),
         );
+    update();
   }
 
   signOut({required BuildContext context}) async {
@@ -75,8 +86,9 @@ class UserAuthController extends GetxController {
       await instance.signOut();
     } on FirebaseAuthException catch (e) {
       log('Não foi possível sair, tente novamente', error: e);
-      toastMessage('Erro ao sair, tente novamente!');
+      snackMessage(message: 'Erro ao sair, tente novamente!');
     }
+    Get.offNamed('/splash');
     update();
   }
 }
