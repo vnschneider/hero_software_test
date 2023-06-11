@@ -4,16 +4,29 @@ import 'package:get/get.dart';
 import 'package:hero_software_test/app/controller/user_auth_controller.dart';
 import 'package:hero_software_test/app/core/styles/color_style.dart';
 import 'package:hero_software_test/app/core/styles/text_styles.dart';
+import 'package:hero_software_test/app/repository/api_repository.dart';
 
 import 'components/custom_drawer.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final apiRepository = Get.put(ApiRepository());
+  final userAuthController = Get.put(UserAuthController());
+  final user = FirebaseAuth.instance.currentUser;
+  @override
+  void initState() {
+    apiRepository.fetchDataFromAPI();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final userAuthController = Get.put(UserAuthController());
-    final user = FirebaseAuth.instance.currentUser;
     return SafeArea(
       child: Scaffold(
         drawer:
@@ -26,11 +39,20 @@ class HomePage extends StatelessWidget {
             style: context.textStyles.textTitle,
           ),
         ),
-        body: Center(
-          child: Text(
-            'Usuário logado com sucesso',
-            style: context.textStyles.textTitle,
-          ),
+        body: FutureBuilder(
+          future: apiRepository.fetchDataFromAPI(),
+          builder: (context, index) {
+            return ListView.builder(
+              itemCount: apiRepository.listData.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(
+                    apiRepository.listData[index]['name'].toString(),
+                  ),
+                );
+              },
+            );
+          },
         ),
       ),
     );

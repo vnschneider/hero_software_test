@@ -106,7 +106,6 @@ class _LoginPageState extends State<LoginPage> {
                           boolValue: isChecked,
                           onChanged: (bool? newValue) {
                             setState(() {
-                              print('Clicou na checkbox. Valor $newValue');
                               isChecked = newValue!;
                             });
                           },
