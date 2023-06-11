@@ -45,12 +45,21 @@ class _HomePageState extends State<HomePage> {
             return ListView.builder(
               itemCount: apiRepository.listData.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(
-                    apiRepository.listData[index]['name'].toString(),
-                  ),
-                  subtitle: Text(
-                    'Placa do veículo: ${apiRepository.listData[index]['plate'].toString().toUpperCase()}',
+                return Card(
+                  margin: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(height: 10),
+                      Text(
+                        apiRepository.listData[index]['name'].toString(),
+                      ),
+                      Text(
+                        'Placa do veículo: ${apiRepository.listData[index]['plate'].toString().toUpperCase()}',
+                      ),
+                      const SizedBox(height: 10),
+                    ],
                   ),
                 );
               },
