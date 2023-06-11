@@ -49,6 +49,9 @@ class _HomePageState extends State<HomePage> {
                   title: Text(
                     apiRepository.listData[index]['name'].toString(),
                   ),
+                  subtitle: Text(
+                    'Placa do veículo: ${apiRepository.listData[index]['plate'].toString().toUpperCase()}',
+                  ),
                 );
               },
             );

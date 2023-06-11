@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class ApiRepository extends GetxController {
-  var listData = [].obs;
-  var result = [].obs;
+  List<dynamic> listData = [];
+
   Future<List<dynamic>> fetchApiData() async {
     final baseUrl = Uri.parse('https://api.carro.cash/user/app/historic');
 
@@ -16,26 +16,28 @@ class ApiRepository extends GetxController {
     final response = await http.get(baseUrl, headers: headers);
 
     if (response.statusCode == 200) {
-      final jsonData = jsonDecode(response.body);
-      log(jsonData);
+      var jsonData = jsonDecode(response.body);
+      var result = <Map<String, dynamic>>[];
+      print(jsonData);
       for (var item in jsonData['data']) {
         result.add({
           'name': item['name'],
+          'plate': item['plate'],
         });
       }
 
       return result;
     } else {
-      log('Falha na solicitação: ${response.statusCode}');
+      print('Falha na solicitação: ${response.statusCode}');
       throw Exception('Falha na solicitação: ${response.statusCode}');
     }
   }
 
   Future fetchDataFromAPI() async {
     try {
-      fetchApiData().then((value) => listData.value = value).toString();
+      await fetchApiData().then((value) => listData = value);
     } catch (e) {
-      throw Exception('Algo deu errado! $e');
+      print('Algo deu errado! $e');
     }
   }
 }
