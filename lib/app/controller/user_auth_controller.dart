@@ -2,11 +2,22 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 class UserAuthController extends GetxController {
   final FirebaseAuth instance = FirebaseAuth.instance;
   late final Rx<User?> user;
+
+  void toastMessage(String message) {
+    Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 17);
+  }
 
   Future<void> loginWithEmailAndPassword(
       {required String emailAddress, required String password}) async {
@@ -16,14 +27,14 @@ class UserAuthController extends GetxController {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         log('No user found for that email.');
-        Get.snackbar('Erro', 'Usuário não cadastrado');
+        toastMessage('Usuário não encontrado!');
       } else if (e.code == 'wrong-password') {
         log('Wrong password provided for that user.');
-        Get.snackbar('Erro!', 'Senha incorreta');
+        toastMessage('Senha ou e-mail incorretos!');
       }
     } catch (e) {
       log('ERROR FIREBASE', error: e);
-      Get.snackbar('Erro!', 'Erro ao acessar a conta. Tente novamente.');
+      toastMessage('Erro ao logar, tente novamente!');
     }
     update();
   }
@@ -41,40 +52,21 @@ class UserAuthController extends GetxController {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
         log('The account already exists for that email.');
-        Get.snackbar('Erro!', 'Esse email já está sendo utilizado');
+        toastMessage('Este e-mail já está em uso!');
       } else if (e.code == 'user-not-found') {
         log('User not found, maybe have been deleted.');
-        Get.snackbar('Erro!', 'Usuário não cadastrado');
+        toastMessage('Usuário não cadastrado!');
       }
     } catch (e) {
       log('ERROR FIREBASE', error: e);
-      Get.snackbar('Erro!', 'Erro ao acessar a conta. Tente novamente.');
+      toastMessage('Erro ao acessar conta, tente novamente!');
     }
     update();
   }
 
-  // _authenticationUser(User? user) {
-  //   if (user == null) {
-  //     Get.offNamed('/');
-  //   } else {
-  //     Get.offNamed('/home');
-  //   }
-  // }
-
-  // @override
-  // void onReady() {
-  //   super.onReady();
-
-  //   user = Rx<User?>(instance.currentUser);
-  //   user.bindStream(instance.userChanges());
-
-  //   ever(user, _authenticationUser);
-  // }
-
   resetPassword({required String email}) async {
     await instance.sendPasswordResetEmail(email: email).catchError(
-          (error) => Get.snackbar(
-              'Recuperação de senha!', 'Erro ao enviar email de recuperação.'),
+          (error) => toastMessage('Erro ao recuperar senha, tente novamente!'),
         );
   }
 
@@ -83,7 +75,7 @@ class UserAuthController extends GetxController {
       await instance.signOut();
     } on FirebaseAuthException catch (e) {
       log('Não foi possível sair, tente novamente', error: e);
-      Get.snackbar('Erro!', 'Erro ao sair, tente novamente.');
+      toastMessage('Erro ao sair, tente novamente!');
     }
     update();
   }

@@ -217,7 +217,6 @@ class _RegisterPageState extends State<RegisterPage> {
                             emailAddress: _emailEC.text.trim(),
                             password: _passwordEC.text.trim(),
                           );
-                          Get.offAllNamed('/home');
                         }
                       },
                       buttonTitle: 'Próximo'),

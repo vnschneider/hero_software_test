@@ -9,9 +9,12 @@ class HSTest extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+final GlobalKey<ScaffoldMessengerState> snackbarKey =
+    GlobalKey<ScaffoldMessengerState>();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeStyle.theme,
+      scaffoldMessengerKey: snackbarKey,
       home: const SplashPage(),
       getPages: getPages,
     );

@@ -116,15 +116,15 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(height: 40),
                   CustomElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          userAuthController.loginWithEmailAndPassword(
-                              emailAddress: _emailEC.text.trim(),
-                              password: _passwordEC.text.trim());
-                          Get.offNamed('/home');
-                        }
-                      },
-                      buttonTitle: 'ENTRAR'),
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        userAuthController.loginWithEmailAndPassword(
+                            emailAddress: _emailEC.text.trim(),
+                            password: _passwordEC.text.trim());
+                      }
+                    },
+                    buttonTitle: 'ENTRAR',
+                  ),
                   const SizedBox(height: 20),
                   Center(
                     child: TextButton(
